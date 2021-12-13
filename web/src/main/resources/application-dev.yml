@@ -1,0 +1,12 @@
+swagger:
+  title: warehousing
+  description: warehousing url
+  version: 1.0
+  termsOfServiceUrl: http://localhost:8888/
+  name: Tommy
+  url: https://www.baidu.com
+  email: 814230847@qq.com
+apiKey:
+  name: Authorization
+  keyName: Authorization
+  passAs: header

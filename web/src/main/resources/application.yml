@@ -1,0 +1,8 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: warehousing-system
+  profiles:
+    active: @profiles.active@
+    include: @profiles.active.dao@,@profiles.active.security@,@profiles.active.cache@

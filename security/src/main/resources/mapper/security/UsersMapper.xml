@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.security.mapper.UsersMapper">
+
+    <resultMap type="com.yang.security.entity.Users" id="UsersMap">
+        <result property="id" column="ID" jdbcType="BIGINT"/>
+        <result property="account" column="ACCOUNT" jdbcType="VARCHAR"/>
+        <result property="username" column="USERNAME" jdbcType="VARCHAR"/>
+        <result property="email" column="EMAIL" jdbcType="VARCHAR"/>
+        <result property="phone" column="PHONE" jdbcType="VARCHAR"/>
+        <result property="gender" column="GENDER" jdbcType="INTEGER"/>
+        <result property="salt" column="SALT" jdbcType="VARCHAR"/>
+        <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+        <result property="accountLock" column="ACCOUNT_LOCK" jdbcType="TINYINT"/>
+        <result property="revision" column="REVISION" jdbcType="INTEGER"/>
+        <result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR"/>
+        <result property="createdByUserId" column="CREATED_BY_USER_ID" jdbcType="BIGINT"/>
+        <result property="createdTime" column="CREATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="UPDATED_BY" jdbcType="VARCHAR"/>
+        <result property="updatedByUserId" column="UPDATED_BY_USER_ID" jdbcType="BIGINT"/>
+        <result property="updatedTime" column="UPDATED_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getUsersByAccount" resultMap="UsersMap">
+        SELECT ACCOUNT,USERNAME,ACCOUNT_LOCK,EMAIL,PHONE,SALT,`PASSWORD` FROM sys_users WHERE ACCOUNT = #{account}
+    </select>
+</mapper>
+

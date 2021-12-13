@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.security.mapper.PermissionMapper">
+
+    <resultMap type="com.yang.security.entity.Permission" id="PermissionMap">
+        <result property="id" column="ID" jdbcType="BIGINT"/>
+        <result property="permissionName" column="PERMISSION_NAME" jdbcType="VARCHAR"/>
+        <result property="permissionKey" column="PERMISSION_KEY" jdbcType="VARCHAR"/>
+        <result property="revision" column="REVISION" jdbcType="INTEGER"/>
+        <result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR"/>
+        <result property="createdByUserId" column="CREATED_BY_USER_ID" jdbcType="BIGINT"/>
+        <result property="createdTime" column="CREATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="UPDATED_BY" jdbcType="VARCHAR"/>
+        <result property="updatedByUserId" column="UPDATED_BY_USER_ID" jdbcType="BIGINT"/>
+        <result property="updatedTime" column="UPDATED_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getPermissionByAccount" resultMap="PermissionMap">
+        SELECT
+            sp.PERMISSION_KEY
+        FROM
+            sys_permission sp,
+            sys_users su,
+            sys_users_role sur,
+            sys_role_permission srp
+        WHERE
+            su.ACCOUNT = #{account}
+            AND su.ID = sur.USER_ID
+            AND sur.ROLE_ID = srp.ROLE_ID
+            AND srp.PERMISSION_ID = sp.ID UNION
+        SELECT
+            sp.PERMISSION_KEY
+        FROM
+            sys_users su,
+            sys_users_permission sup,
+            sys_permission sp
+        WHERE
+            su.ACCOUNT = #{account}
+            AND su.ID = sup.USER_ID
+            AND sup.PERMISSION_ID = sp.ID
+    </select>
+
+</mapper>
+
